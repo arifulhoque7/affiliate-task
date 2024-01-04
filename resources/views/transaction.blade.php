@@ -24,13 +24,13 @@
                                     <thead>
                                         <tr>
                                             <th
-                                                class="px-6 py-3 bg-gray-200 text-white-600 uppercase text-xs leading-4 font-semibold tracking-wider">
+                                                class="px-6 py-3  text-white-600 uppercase text-xs leading-4 font-semibold tracking-wider">
                                                 {{ __('Sl.') }}</th>
                                             <th
-                                                class="px-6 py-3 bg-gray-200 text-white-600 uppercase text-xs leading-4 font-semibold tracking-wider">
+                                                class="px-6 py-3  text-white-600 uppercase text-xs leading-4 font-semibold tracking-wider">
                                                 {{ __('Amount') }}</th>
                                             <th
-                                                class="px-6 py-3 bg-gray-200 text-white-600 uppercase text-xs leading-4 font-semibold tracking-wider">
+                                                class="px-6 py-3  text-white-600 uppercase text-xs leading-4 font-semibold tracking-wider">
                                                 {{ __('Details') }}</th>
 
                                         </tr>

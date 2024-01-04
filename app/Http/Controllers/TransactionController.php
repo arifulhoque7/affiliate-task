@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commission;
 use App\Models\User;
 use App\Models\UserPromo;
+use App\Models\Commission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\CommissionNotification;
 
 class TransactionController extends Controller
 {
@@ -45,7 +47,7 @@ class TransactionController extends Controller
                     $commissionAmountAff = $request->amount * 0.1;
                 }
                 
-                Commission::create([
+                $commission = Commission::create([
                     'user_id' => $affiliateUser->id,
                     'transaction_id' => $transaction->id,
                     'amount' => $request->amount,
@@ -53,6 +55,9 @@ class TransactionController extends Controller
                     'created_by' => $user->id,
                     'created_at' => now(),
                 ]);
+    
+                // Send notification to affiliate user
+                Notification::send($affiliateUser, new CommissionNotification($commission));
                 
                 if ($affiliateUser->type == 3) {
                     $subAffiliateUser = User::find($affiliateUser->created_by);
@@ -60,7 +65,7 @@ class TransactionController extends Controller
                     if ($subAffiliateUser) {
                         $commissionAmountSubAff = $request->amount * 0.2;
 
-                       Commission::create([
+                        $commission = Commission::create([
                             'user_id' => $subAffiliateUser->id,
                             'transaction_id' => $transaction->id,
                             'amount' => $request->amount,
